@@ -1,6 +1,6 @@
 {
   "name": "@intacct/intacct-sdk",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "description": "Sage Intacct SDK for JavaScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,6 +44,7 @@
     "coverage": "nyc npm run test",
     "preversion": "npm test",
     "version": "npm run build",
+    "prepare": "npm run build",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
