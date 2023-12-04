@@ -46,11 +46,13 @@ export default class InvoiceLineCreate extends AbstractInvoiceLine {
         xml.writeElement("revrectemplate", this.revRecTemplateId);
         xml.writeElement("defrevaccount", this.deferredRevGlAccountNo);
 
-        xml.writeStartElement("taxentries");
-        xml.writeStartElement("taxentry");
-        xml.writeElement("detailid", this.taxEntry);
-        xml.writeEndElement(); // taxEntry
-        xml.writeEndElement(); // taxEntries
+        if (this.taxEntry != null) {
+            xml.writeStartElement("taxentries");
+            xml.writeStartElement("taxentry");
+            xml.writeElement("detailid", this.taxEntry);
+            xml.writeEndElement(); // taxEntry
+            xml.writeEndElement(); // taxEntries
+        }
         if (this.revRecStartDate != null) {
             xml.writeStartElement("revrecstartdate");
             xml.writeDateSplitElements(this.revRecStartDate);
