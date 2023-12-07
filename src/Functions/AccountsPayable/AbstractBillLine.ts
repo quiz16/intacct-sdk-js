@@ -43,6 +43,7 @@ export default abstract class AbstractBillLine implements IXmlObject {
     public classId: string;
     public contractId: string;
     public warehouseId: string;
+    public taxEntry: string;
 
     public customFields: Array<[string, any]> = [];
 

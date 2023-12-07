@@ -31,6 +31,14 @@ export default class BillLineCreate extends AbstractBillLine {
             xml.writeElement("glaccountno", this.glAccountNumber, true);
         }
 
+        if (this.taxEntry != null) {
+            xml.writeStartElement("taxentries");
+            xml.writeStartElement("taxentry");
+            xml.writeElement("detailid", this.taxEntry);
+            xml.writeEndElement(); // taxEntry
+            xml.writeEndElement(); // taxEntries
+        }
+
         xml.writeElement("offsetglaccountno", this.offsetGlAccountNumber);
         xml.writeElement("amount", this.transactionAmount);
         xml.writeElement("allocationid", this.allocationId);
