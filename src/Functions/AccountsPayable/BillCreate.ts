@@ -30,6 +30,10 @@ export default class BillCreate extends AbstractBill {
 
         xml.writeElement("vendorid", this.vendorId, true);
 
+        if (this.inclusiveTax != null) {
+            xml.writeElement("inclusivetax", this.inclusiveTax);
+        }
+
         xml.writeStartElement("datecreated");
         xml.writeDateSplitElements(this.transactionDate);
         xml.writeEndElement(); // datecreated

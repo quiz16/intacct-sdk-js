@@ -45,6 +45,7 @@ export default abstract class AbstractBill extends AbstractFunction {
     public payToContactName: string;
     public returnToContactName: string;
     public attachmentsId: string;
+    public inclusiveTax: boolean;
     public lines: AbstractBillLine[];
 
     public customFields: Array<[string, any]> = [];

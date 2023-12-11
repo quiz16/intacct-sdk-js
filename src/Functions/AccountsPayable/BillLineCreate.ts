@@ -30,15 +30,6 @@ export default class BillLineCreate extends AbstractBillLine {
         } else {
             xml.writeElement("glaccountno", this.glAccountNumber, true);
         }
-
-        if (this.taxEntry != null) {
-            xml.writeStartElement("taxentries");
-            xml.writeStartElement("taxentry");
-            xml.writeElement("detailid", this.taxEntry);
-            xml.writeEndElement(); // taxEntry
-            xml.writeEndElement(); // taxEntries
-        }
-
         xml.writeElement("offsetglaccountno", this.offsetGlAccountNumber);
         xml.writeElement("amount", this.transactionAmount);
         xml.writeElement("allocationid", this.allocationId);
@@ -61,6 +52,13 @@ export default class BillLineCreate extends AbstractBillLine {
         xml.writeElement("contractid", this.contractId);
         xml.writeElement("warehouseid", this.warehouseId);
         xml.writeElement("billable", this.billable);
+        if (this.taxEntry != null) {
+            xml.writeStartElement("taxentries");
+            xml.writeStartElement("taxentry");
+            xml.writeElement("detailid", this.taxEntry);
+            xml.writeEndElement(); // taxEntry
+            xml.writeEndElement(); // taxEntries
+        }
 
         xml.writeEndElement(); // lineitem
     }
