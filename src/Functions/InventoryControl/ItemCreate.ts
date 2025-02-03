@@ -56,6 +56,11 @@ export default class ItemCreate extends AbstractItem {
         xml.writeElement("BASEPRICE", this.basePrice);
         xml.writeElement("TAXABLE", this.taxable);
         xml.writeElement("TAXGROUP", this.itemTaxGroupName);
+
+        xml.writeStartElement("TAXGROUP");
+        xml.writeElement("NAME", this.itemTaxGroupName);
+        xml.writeEndElement(); // TAXGROUP
+
         xml.writeElement("DEFAULTREVRECTEMPLKEY", this.defaultRevRecTemplateId);
         xml.writeElement("INCOMEACCTKEY", this.revenueGlAccountNo);
         xml.writeElement("INVACCTKEY", this.inventoryGlAccountNo);
