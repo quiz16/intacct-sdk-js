@@ -55,7 +55,6 @@ export default class ItemCreate extends AbstractItem {
         xml.writeElement("STANDARD_COST", this.standardCost);
         xml.writeElement("BASEPRICE", this.basePrice);
         xml.writeElement("TAXABLE", this.taxable);
-        xml.writeElement("TAXGROUP", this.itemTaxGroupName);
 
         xml.writeStartElement("TAXGROUP");
         xml.writeElement("NAME", this.itemTaxGroupName);
