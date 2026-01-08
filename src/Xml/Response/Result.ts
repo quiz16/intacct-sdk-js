@@ -90,76 +90,76 @@ export default class Result {
     }
 
     constructor(result: object) {
-        if (!result.hasOwnProperty("status")) {
+        if (!Object.prototype.hasOwnProperty.call(result, "status")) {
             throw new IntacctException("Response result block is missing status element");
         }
         this._status = result["status"];
-        if (!result.hasOwnProperty("function")) {
+        if (!Object.prototype.hasOwnProperty.call(result, "function")) {
             throw new IntacctException("Response result block is missing function element");
         }
         this._functionName = result["function"];
-        if (!result.hasOwnProperty("controlid")) {
+        if (!Object.prototype.hasOwnProperty.call(result, "controlid")) {
             throw new IntacctException("Response result block is missing controlid element");
         }
         this._controlId = result["controlid"];
 
         if (result["status"] !== "success") {
-            if (result.hasOwnProperty("errormessage")) {
+            if (Object.prototype.hasOwnProperty.call(result, "errormessage")) {
                 const errorMessage = new ErrorMessage(result["errormessage"]);
 
                 this._errors = errorMessage.errors;
             }
         } else {
-            if (result.hasOwnProperty("key") && result["key"] != null) {
+            if (Object.prototype.hasOwnProperty.call(result, "key") && result["key"] != null) {
                 this._key = result["key"].toString();
-            } else if (result.hasOwnProperty("listtype") && result["listtype"] != null) {
+            } else if (Object.prototype.hasOwnProperty.call(result, "listtype") && result["listtype"] != null) {
                 const listType = result["listtype"];
                 this._listType = result["listtype"].toString();
-                if (listType.hasOwnProperty(["$"])) {
+                if (Object.prototype.hasOwnProperty.call(listType, "$")) {
                     const listTypeAttr = listType["$"];
-                    if (listTypeAttr.hasOwnProperty("total")) {
+                    if (Object.prototype.hasOwnProperty.call(listTypeAttr, "total")) {
                         this._totalCount = parseInt(listTypeAttr["total"], 10);
                     }
-                    if (listTypeAttr.hasOwnProperty("start")) {
+                    if (Object.prototype.hasOwnProperty.call(listTypeAttr, "start")) {
                         this._start = parseInt(listTypeAttr["start"], 10);
                     }
-                    if (listTypeAttr.hasOwnProperty("end")) {
+                    if (Object.prototype.hasOwnProperty.call(listTypeAttr, "end")) {
                         this._end = parseInt(listTypeAttr["end"], 10);
                     }
                 }
             } else if (
-                result.hasOwnProperty("data")
-                && result["data"].hasOwnProperty("$")
-                && result["data"]["$"].hasOwnProperty("listtype")
+                Object.prototype.hasOwnProperty.call(result, "data")
+                && Object.prototype.hasOwnProperty.call(result["data"], "$")
+                && Object.prototype.hasOwnProperty.call(result["data"]["$"], "listtype")
                 && result["data"]["$"]["listtype"] != null
             ) {
                 const dataAttr = result["data"]["$"];
 
-                if (dataAttr.hasOwnProperty("listtype")) {
+                if (Object.prototype.hasOwnProperty.call(dataAttr, "listtype")) {
                     this._listType = dataAttr["listtype"].toString();
                 }
 
-                if (dataAttr.hasOwnProperty("totalcount")) {
+                if (Object.prototype.hasOwnProperty.call(dataAttr, "totalcount")) {
                     this._totalCount = parseInt(dataAttr["totalcount"], 10);
                 }
 
-                if (dataAttr.hasOwnProperty("count")) {
+                if (Object.prototype.hasOwnProperty.call(dataAttr, "count")) {
                     this._count = parseInt(dataAttr["count"], 10);
                 }
 
-                if (dataAttr.hasOwnProperty("numremaining")) {
+                if (Object.prototype.hasOwnProperty.call(dataAttr, "numremaining")) {
                     this._numRemaining = parseInt(dataAttr["numremaining"], 10);
                 }
 
-                if (dataAttr.hasOwnProperty("resultId")) {
+                if (Object.prototype.hasOwnProperty.call(dataAttr, "resultId")) {
                     this._resultId = dataAttr["resultId"].toString();
                 }
             }
 
-            if (result.hasOwnProperty("data")) {
+            if (Object.prototype.hasOwnProperty.call(result, "data")) {
                 const data = [];
                 for (const key in result["data"]) {
-                    if (key !== "$" && result["data"].hasOwnProperty(key)) {
+                    if (key !== "$" && Object.prototype.hasOwnProperty.call(result["data"], key)) {
                         if (isArray(result["data"][key])) {
                             for (const child of result["data"][key]) {
                                 data.push(child);

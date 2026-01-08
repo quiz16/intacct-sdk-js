@@ -30,10 +30,10 @@ export default class OfflineResponse extends AbstractResponse {
     constructor(body: string) {
         super(body);
 
-        if (!this.xml["response"].hasOwnProperty("acknowledgement")) {
+        if (!Object.prototype.hasOwnProperty.call(this.xml["response"], "acknowledgement")) {
             throw new IntacctException("Response block is missing acknowledgement block");
         }
-        if (!this.xml["response"]["acknowledgement"].hasOwnProperty("status")) {
+        if (!Object.prototype.hasOwnProperty.call(this.xml["response"]["acknowledgement"], "status")) {
             throw new IntacctException("Acknowledgement block is missing status element");
         }
         this._status = this.xml["response"]["acknowledgement"]["status"];

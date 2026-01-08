@@ -47,21 +47,21 @@ export default class Control {
     }
 
     constructor(control: object) {
-        if (!control.hasOwnProperty("status")) {
+        if (!Object.prototype.hasOwnProperty.call(control, "status")) {
             throw new IntacctException("Control block is missing status element");
         }
 
         this._status = control["status"];
-        if (control.hasOwnProperty("senderid")) {
+        if (Object.prototype.hasOwnProperty.call(control, "senderid")) {
             this._senderId = control["senderid"];
         }
-        if (control.hasOwnProperty("controlid")) {
+        if (Object.prototype.hasOwnProperty.call(control, "controlid")) {
             this._controlId = control["controlid"];
         }
-        if (control.hasOwnProperty("uniqueid")) {
+        if (Object.prototype.hasOwnProperty.call(control, "uniqueid")) {
             this._uniqueId = control["uniqueid"];
         }
-        if (control.hasOwnProperty("dtdversion")) {
+        if (Object.prototype.hasOwnProperty.call(control, "dtdversion")) {
             this._dtdVersion = control["dtdversion"];
         }
     }

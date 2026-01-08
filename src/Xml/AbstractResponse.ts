@@ -45,18 +45,18 @@ export default abstract class AbstractResponse {
             }
             this._xml = xmlObject;
 
-            if (!this.xml.hasOwnProperty("response")) {
+            if (!Object.prototype.hasOwnProperty.call(this.xml, "response")) {
                 throw new IntacctException("Response XML is missing root response element");
             }
 
-            if (!this.xml["response"].hasOwnProperty("control")) {
+            if (!Object.prototype.hasOwnProperty.call(this.xml["response"], "control")) {
                 throw new IntacctException("Response block is missing control element");
             }
             this._control = new Control(this.xml["response"]["control"]);
 
             if (this.control.status !== "success") {
                 let errors = [];
-                if (this.xml["response"].hasOwnProperty("errormessage")) {
+                if (Object.prototype.hasOwnProperty.call(this.xml["response"], "errormessage")) {
                     const errorMessage = new ErrorMessage(this.xml["response"]["errormessage"]);
                     errors = errorMessage.errors;
                 }

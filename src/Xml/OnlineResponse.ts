@@ -39,11 +39,11 @@ export default class OnlineResponse extends AbstractResponse {
         super(body);
 
         this._results = [];
-        if (!isNullOrUndefined(this.xml) && !this.xml["response"].hasOwnProperty("operation")) {
+        if (!isNullOrUndefined(this.xml) && !Object.prototype.hasOwnProperty.call(this.xml["response"], "operation")) {
             throw new IntacctException("Response block is missing operation block");
         }
 
-        if (!this.xml["response"]["operation"].hasOwnProperty("authentication")) {
+        if (!Object.prototype.hasOwnProperty.call(this.xml["response"]["operation"], "authentication")) {
             throw new IntacctException("Authentication block is missing from operation element");
         }
         this._authentication = new Authentication(this._xml["response"]["operation"]["authentication"]);
@@ -52,14 +52,14 @@ export default class OnlineResponse extends AbstractResponse {
 
             throw new ResponseException("Response authentication status failure", errorMessage.errors);
         }
-        if (!this.xml["response"]["operation"].hasOwnProperty("result")) {
+        if (!Object.prototype.hasOwnProperty.call(this.xml["response"]["operation"], "result")) {
             throw new IntacctException("Result block is missing from operation element");
         }
 
-        if (this.xml["response"]["operation"].hasOwnProperty("result")) {
+        if (Object.prototype.hasOwnProperty.call(this.xml["response"]["operation"], "result")) {
             if (isArray(this.xml["response"]["operation"]["result"])) {
                 for (const index in this.xml["response"]["operation"]["result"]) {
-                    if (this.xml["response"]["operation"]["result"].hasOwnProperty(index)) {
+                    if (Object.prototype.hasOwnProperty.call(this.xml["response"]["operation"]["result"], index)) {
                         this._results.push(new Result(this.xml["response"]["operation"]["result"][index]));
                     }
                 }

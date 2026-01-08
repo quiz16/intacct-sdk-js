@@ -31,11 +31,11 @@ export default class ErrorMessage {
 
     constructor(errorMessages: object) {
         const errorContents = [];
-        if (errorMessages.hasOwnProperty("error")) {
+        if (Object.prototype.hasOwnProperty.call(errorMessages, "error")) {
             const errors = errorMessages["error"];
             if (Array.isArray(errors)) {
                 for (const index in errors) {
-                    if (errors.hasOwnProperty(index)) {
+                    if (Object.prototype.hasOwnProperty.call(errors, index)) {
                         const errorObject = errors[index];
                         const pieces = this.combineErrorMessageElements(errorObject);
                         errorContents.push(pieces.join(" "));
@@ -52,7 +52,7 @@ export default class ErrorMessage {
     private combineErrorMessageElements(errorObject: object) {
         const pieces = [];
         for (const errorField in errorObject) {
-            if (errorObject.hasOwnProperty(errorField)) {
+            if (Object.prototype.hasOwnProperty.call(errorObject, errorField)) {
                 const value = errorObject[errorField];
                 let piece = striptags(value);
                 piece = piece.trim();

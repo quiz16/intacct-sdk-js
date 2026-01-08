@@ -52,13 +52,13 @@ export default class Authentication {
     }
 
     constructor(authentication: object) {
-        if (!authentication.hasOwnProperty("status")) {
+        if (!Object.prototype.hasOwnProperty.call(authentication, "status")) {
             throw new IntacctException("Authentication block is missing status element");
         }
-        if (!authentication.hasOwnProperty("userid")) {
+        if (!Object.prototype.hasOwnProperty.call(authentication, "userid")) {
             throw new IntacctException("Authentication block is missing userid element");
         }
-        if (!authentication.hasOwnProperty("companyid")) {
+        if (!Object.prototype.hasOwnProperty.call(authentication, "companyid")) {
             throw new IntacctException("Authentication block is missing companyid element");
         }
 
